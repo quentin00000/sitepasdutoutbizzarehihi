@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Caca Magique</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: sans-serif;
+    }
+
+    .caca-center {
+      font-size: 5rem;
+      color: #00f;
+      text-shadow: 0 0 20px #00f, 0 0 40px #0ff;
+      animation: blink 2s infinite, flame 1s infinite;
+      z-index: 2;
+      position: relative;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    @keyframes flame {
+      0% { text-shadow: 0 0 10px #0ff, 0 0 20px #00f; }
+      50% { text-shadow: 0 0 30px #0ff, 0 0 60px #00f; }
+      100% { text-shadow: 0 0 10px #0ff, 0 0 20px #00f; }
+    }
+
+    .falling-caca {
+      position: absolute;
+      top: -50px;
+      font-size: 2rem;
+      color: #a52a2a;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(110vh);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="caca-center">💩 caca 💩</div>
+
+  <script>
+    const body = document.body;
+
+    function createCaca() {
+      const caca = document.createElement('div');
+      caca.classList.add('falling-caca');
+      caca.textContent = '💩';
+      caca.style.left = Math.random() * 100 + 'vw';
+      caca.style.animationDuration = 2 + Math.random() * 3 + 's';
+      caca.style.fontSize = (1 + Math.random() * 2) + 'rem';
+      body.appendChild(caca);
+
+      setTimeout(() => caca.remove(), 5000);
+    }
+
+    setInterval(createCaca, 200); // un caca toutes les 0.2s
+  </script>
+</body>
+</html>
+
